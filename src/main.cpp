@@ -634,8 +634,7 @@ void callback(char* topic, byte* payload, unsigned int length)
     // loop through the string to extract all other tokens
     while( token != NULL && done == false) 
     {
-        Serial.printf( " %s\n", token ); //printing each token
-        //publish_to_topic(String(area + "/" + sensor + "/tokens"),String(token));
+        //Serial.printf( " %s\n", token ); //printing each token
         switch (counter)
         {
           case 0:
@@ -644,8 +643,6 @@ void callback(char* topic, byte* payload, unsigned int length)
             if (res != 0)
             {
               done = true;
-              //publish_to_topic(String(area + "/" + sensor + "/error"),String("failed to parse area" + area + String(token)));
-              //Serial.printf("Failed to parse area |%s| |%s|\n",area, token);
             }
             
           }
@@ -656,9 +653,6 @@ void callback(char* topic, byte* payload, unsigned int length)
             if (res != 0) 
             {
               done = true;
-              //publish_to_topic(String(area + "/" + sensor + "/error"),String("failed to parse sensor"));
-              //Serial.printf("Failed to parse sensor |%s| |%s|\n",sensor, token);
-
             }
           }
           break;
@@ -669,9 +663,6 @@ void callback(char* topic, byte* payload, unsigned int length)
             if (res != 0) 
             {
               done = true;
-              //publish_to_topic(String(area + "/" + sensor + "/error"),String("failed to parse calibrate"));
-              //Serial.printf("Failed to parse calibrate |%s|\n", token);
-
             }
             else
             {
@@ -681,7 +672,6 @@ void callback(char* topic, byte* payload, unsigned int length)
               {
                 zero_all();
                 publish_to_topic(String(area + "/" + sensor + "/last_calibration"),String(millis()));
-                //Serial.printf("Calibrated...\n");
                 done=true;
               }
               else if (strcmp(r, (char*)b) == 0)
